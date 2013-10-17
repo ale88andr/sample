@@ -1,0 +1,15 @@
+.label.label-info Top 5 raiting hotels :
+%br
+%br
+- unless toprates.nil?
+  - toprates.each do |top|
+    - unless top.hotel.nil?
+      .span2
+        = image_tag top.hotel.photo_url, size: "60x40", class: "img-rounded"
+        %br
+        = link_to "#{top.hotel.title}(Rate: #{top.rating})", hotel_path(top.hotel.id)
+        %hr
+        %br
+- else
+  %p No hotels are added or rate
+%br

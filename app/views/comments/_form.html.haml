@@ -1,0 +1,15 @@
+- if user_signed_in?
+  %b #{current_user.name}
+  , enter your comment about '#{@hotel.title}'
+  %fieldset
+    %legend Add comment
+    = form_for ([@hotel, @hotel.comments.build]) do |f|
+      = render "common/errors", object: f.object if f.object.errors.any?
+      .field
+        = f.label :text, "Type comment"
+        = f.text_area :text, class: "span8", rows: 5
+      %br
+      .field
+        = f.submit "Add comment", class:"btn"
+- else
+  %span.unregistered #{link_to 'Sign Up', new_user_registration_path}  or #{link_to 'enter', new_user_session_path} to add comment

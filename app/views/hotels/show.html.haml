@@ -1,0 +1,51 @@
+- provide(:title, "Show hotel #{@hotel.title}")
+%h3 View #{@hotel.title}
+.row
+  .span8.offset2
+    .span6
+      %ul.thumbnails
+        .thumbnail= image_tag @hotel.photo_url, class: "img-rounded"
+    .span6
+      .label.label-info Hotel Title :
+      %b= @hotel.title
+      %br
+      .label.label-info Hotel room description :
+      = @hotel.room_description
+      %br
+      .label.label-info Hotel room price :
+      = @hotel.price_for_room
+      %br
+      .label.label-info Hotel adress :
+      = @hotel.address
+      %br
+      .label.label-info Include breakfast :
+      = check_breakfast_include @hotel.breakfast
+      %br
+      .label.label-info Hotel Added by :
+      = @hotel.user.name
+      %br
+      .label.label-info Hotel Rate :
+      %br
+      Rate :
+      .badge.badge-important= count_rate(@hotel.rates, @hotel.rates.size)
+      Votes :
+      .badge.badge-important= @hotel.rates.size
+      %br
+.row
+  .span8.offset2
+    - if @hotel.rates.current_user_vote?(current_user.id)
+      %br
+      %p.text-error You are voted this hotel, vote can't be added twice
+    - else
+      = render "rates/create_form"
+.row
+  .span8.offset2
+    %hr
+    - if @hotel.comments.empty?
+      %p.text-warning No comments added
+    - else
+      Comments:
+      .badge.badge-important= @hotel.comments.size
+      %br
+      = render @hotel.comments
+    = render "comments/form"

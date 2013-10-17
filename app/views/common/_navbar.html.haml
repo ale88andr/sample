@@ -1,0 +1,11 @@
+.navbar
+  .navbar-inner
+    = link_to "Hotels", root_path, class: "brand"
+    %ul.nav
+      - if user_signed_in?
+        %li.active= link_to("Logout (#{current_user.name})", destroy_user_session_path, method: :get)
+        %li= link_to('Edit registration', edit_user_registration_path)
+        %li= link_to('Add hotel', new_hotel_path)
+      - else
+        %li.active= link_to('Login', new_user_session_path)
+        %li= link_to('Register', new_user_registration_path)

@@ -1,0 +1,5 @@
+.alert
+	%h4 There are (#{object.errors.count}) errors exists :"
+	.error-wrap
+		- object.errors.full_messages.each do |msg|
+			.error= msg

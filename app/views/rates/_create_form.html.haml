@@ -1,0 +1,11 @@
+%fieldset
+  %legend
+    %b Rate '#{@hotel.title}' hotel
+  = form_for ([@hotel, @hotel.rates.build]) do |f|
+    = render "common/errors", object: f.object if f.object.errors.any?
+    .control-group
+      = f.label :rate, "Select rate :", class: "control-label"
+      = f.select :rate, options_for_select([1, 2, 3, 4, 5]), class: "span1"
+    %br
+    .field
+      = f.submit "Rate hotel", class:"btn"

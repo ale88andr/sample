@@ -1,0 +1,15 @@
+- provide(:title, "Hotels list")
+%h1 Welcome to hotels catalogue
+.new-hotel= link_to "Add your hotel", new_hotel_path
+.row
+  .span12
+    = render "common/top"
+  .span12.hotels-list
+    - unless @hotels.blank?
+      .label.label-info Total: #{@hotels.size}
+      %br
+      %br
+      %ul.thumbnails
+        = render @hotels
+    - else
+      %p.text-warning There are no hotels added yet
