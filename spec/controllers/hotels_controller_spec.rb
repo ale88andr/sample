@@ -12,7 +12,7 @@ describe HotelsController do
       expect(response).to render_template file: :index
     end
 
-    it "assigns @hotel to :index" do
+    it "assigns @hotels to :index" do
       expect(assigns[:hotels]).to eq [hotel]
     end
   end
@@ -32,7 +32,7 @@ describe HotelsController do
 
   describe "GET #new" do
     let!(:hotel) {mock_model(Hotel).as_new_record}
-    before do 
+    before do
       Hotel.stub(:new).and_return(hotel)
       get :new
     end
