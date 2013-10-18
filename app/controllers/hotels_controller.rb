@@ -4,7 +4,7 @@ class HotelsController < ApplicationController
   end
 
   def show
-    @hotel = Hotel.find_by_id(params[:id])
+    @hotel = Hotel.find(params[:id])
   end
 
   def new
