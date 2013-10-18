@@ -18,15 +18,25 @@ describe HotelsController do
   end
 
   describe "GET #show" do
-    let(:hotel) {FactoryGirl.create(:hotel)}
-    before { get :show, id: hotel }
+    context "on existing item" do
+      let(:hotel) {FactoryGirl.create(:hotel)}
+      before { get :show, id: hotel }
 
-    it "render :show template" do
-      expect(response).to render_template file: :show
+      it "render :show template" do
+        expect(response).to render_template file: :show
+      end
+
+      it "assigns @hotel to :show" do
+        expect(assigns[:hotel]).to eq hotel
+      end
     end
 
-    it "assigns @hotel to :show" do
-      expect(assigns[:hotel]).to eq hotel
+    context "on non existing item" do
+      before { get :show, id: 999 }
+
+      it "render not_found template" do
+        expect(response).to render_template file: "public/404"
+      end
     end
   end
 
@@ -71,3 +81,4 @@ describe HotelsController do
   end
 
 end
+
